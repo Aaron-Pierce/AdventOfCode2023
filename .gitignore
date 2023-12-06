@@ -1,2 +1,3 @@
+node_modules/
 day*/*.js
 day*/input.txt
