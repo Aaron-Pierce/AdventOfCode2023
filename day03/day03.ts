@@ -1,21 +1,8 @@
 import { readFileSync } from "fs";
+import { groupBy } from "../utils";
 
 const sum = (a: number, b: number) => a + b;
 const isDigit = (char: string) => '0' <= char && char <= '9';
-
-function groupBy<T>(arr: T[], predicate: (el: T) => boolean): T[][]{
-    if(arr.length === 0) return [];
-    let grouped: T[][] = [[arr[0]]];
-    let lastPredicateResult = predicate(arr[0]);
-    for(let i = 1; i < arr.length; i++) {
-        let el = arr[i];
-        let predicateResult = predicate(el);
-        if(predicateResult === lastPredicateResult) grouped[grouped.length - 1].push(el)
-        else grouped.push([el]);
-        lastPredicateResult = predicateResult;
-    }
-    return grouped;
-}
 
 function last<T>(arr: T[]): T {
     return arr[arr.length - 1];
