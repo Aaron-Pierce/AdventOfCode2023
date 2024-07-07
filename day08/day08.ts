@@ -55,7 +55,7 @@ function part2(directions: string, inputLines: [string, [string, string]][]) {
     let positions = Object.keys(networkMap).filter(e => e.endsWith("A"));
 
     // The one liner I used in part1 was gross
-    const advance_ = (pos, step) => {
+    const advance = (pos: string, step: number): [string, number] => {
         let direction = directions[step % directions.length];
         let directionAsIndex = "LR".indexOf(direction);
         let nextPosition = networkMap[pos][directionAsIndex];
@@ -72,7 +72,7 @@ function part2(directions: string, inputLines: [string, [string, string]][]) {
 
         while (!visited.has(memoKey(position, step))) {
             visited.add(memoKey(position, step));
-            [position, step] = advance_(position, step);
+            [position, step] = advance(position, step);
         }
         
 
@@ -88,7 +88,7 @@ function part2(directions: string, inputLines: [string, [string, string]][]) {
         let position = startPosition;
         let step = 0;
         while (!(position == loop.startPosition && (step % directions.length) == (loop.startStep % directions.length))) {
-            [position, step] = advance_(position, step);
+            [position, step] = advance(position, step);
 
         }
         
@@ -96,11 +96,11 @@ function part2(directions: string, inputLines: [string, [string, string]][]) {
         // This offset is always equal to startPosition.startStep,
         // so this is redundant.
         const offset = step;
-        [position, step] = advance_(position, step);
+        [position, step] = advance(position, step);
 
         // Walk the loop until we get back to the start state
         while (!(position == loop.startPosition && (step % directions.length) == (loop.startStep % directions.length))) {
-            [position, step] = advance_(position, step);
+            [position, step] = advance(position, step);
 
         }
         
@@ -119,7 +119,7 @@ function part2(directions: string, inputLines: [string, [string, string]][]) {
         for(let i = 0; i < pathLength; i++) {
             
             if(position.endsWith("Z")) finds.push([position, i]);
-            [position, step] = advance_(position, step);
+            [position, step] = advance(position, step);
 
         }
         return finds;
@@ -136,7 +136,7 @@ function part2(directions: string, inputLines: [string, [string, string]][]) {
         assert((loopLength - loopIndexOfEnd) === loopOffset) // happens to be true for all of the loops
         // Now, find the offset - how long it takes from t=0 to beginning the loop
 
-        let stepsWhenOnPotentialEndNode = (i) => loopOffset + (i * loopIndexOfEnd) + (i-1) * (loopLength - loopIndexOfEnd);
+        let stepsWhenOnPotentialEndNode = (i: number) => loopOffset + (i * loopIndexOfEnd) + (i-1) * (loopLength - loopIndexOfEnd);
         generatingFunctions.push(stepsWhenOnPotentialEndNode);
     }
     
