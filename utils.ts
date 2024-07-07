@@ -2,6 +2,7 @@ export const sum = (a: number, b: number) => a + b;
 export const ident = <T>(a: T) => a;
 export const tail = <T>(arr: T[]) => { arr.shift(); return arr };
 export const parseNum = (str: string) => parseInt(str); // Why? Because parseInt takes a radius as a second argument, so Array.map(parseInt) will use the element's index as the radix.
+export const last = <T>(arr: T[]) => arr[arr.length - 1];
 
 export function groupByInd<T>(arr: T[], predicate: (el: T, ind: number) => boolean): T[][]{
     if(arr.length === 0) return [];
