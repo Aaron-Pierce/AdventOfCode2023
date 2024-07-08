@@ -1,4 +1,4 @@
 node_modules/
 day*/*.js
-day*/input.txt
+day*/*.txt
 *.js
