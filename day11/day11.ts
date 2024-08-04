@@ -21,8 +21,8 @@ function __findEmptyColumns(grid: (row: number, col: number) => string, numRows:
     return emptyColumns;
 }
 
-// Pass the grid as normal to __findEmptyColumns, so that it just finds the empty columns
 function findEmptyColumns(grid: string[][]) {
+    // Pass the grid as normal to __findEmptyColumns, so that it just finds the empty columns
     return __findEmptyColumns(
         (row, col) => grid[row][col],
         grid.length,
@@ -30,12 +30,12 @@ function findEmptyColumns(grid: string[][]) {
     )
 }
 
-// Pass the "transposed" grid to __findEmptyColumns, so that it actually finds the empty rows.
-// To "transpose" the grid, the row/col which __findEmptyColumns uses is swapped,
-// and so we also swap numRows and numCols
 function findEmptyRows(grid: string[][]) {
+    // Pass the "transposed" grid to __findEmptyColumns, so that it actually finds the empty rows.
+    // To "transpose" the grid, the row/col which __findEmptyColumns uses is swapped,
+    // and so we also swap numRows and numCols
     return __findEmptyColumns(
-        (col, row) => grid[row][col],
+        (row, col) => grid[col][row],
         grid[0].length,
         grid.length
     )
